@@ -1,0 +1,22 @@
+import {z} from "zod";
+
+export const CreateUserSchema = z.object({
+    username: z.string().min(3).max(20),
+    password: z.string(),
+    name: z.string(),
+});
+
+export type CreateUser = z.infer<typeof CreateUserSchema>;
+
+export const SigninUserSchema = z.object({
+  user: z.string(),
+  password: z.string(),
+});
+
+export type LoginUser = z.infer<typeof SigninUserSchema>;
+
+export const CreateRoomSchema = z.object({
+  name: z.string(),
+});
+
+export type CreateRoom = z.infer<typeof CreateRoomSchema>;
