@@ -1,7 +1,7 @@
-import {z} from "zod";
+const {z}=  require("zod");
 
 export const CreateUserSchema = z.object({
-    username: z.string().min(3).max(20),
+    email: z.string().email(),
     password: z.string(),
     name: z.string(),
 });
@@ -11,6 +11,7 @@ export type CreateUser = z.infer<typeof CreateUserSchema>;
 export const SigninUserSchema = z.object({
   user: z.string(),
   password: z.string(),
+  name: z.string(),
 });
 
 export type LoginUser = z.infer<typeof SigninUserSchema>;

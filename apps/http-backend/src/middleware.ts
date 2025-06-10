@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { JWT_SECRET } from "@repo/backend-common/config";
-
-interface AuthenticatedRequest extends Request {
+const { JWT_SECRET } = require("@repo/backend-common/config");
+export interface AuthenticatedRequest extends Request {
   userId?: string;
 }
 
