@@ -1,18 +1,17 @@
 import express from "express";
-const app = express();
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-app.use(express.json());
-
 import { middleware } from "./middleware.js";
-const { JWT_SECRET } = require("@repo/backend-common/config");
-
+import { JWT_SECRET } from "@repo/backend-common/config";
 import {
   CreateUserSchema,
   SigninUserSchema,
   CreateRoomSchema,
 } from "@repo/common/types";
 import { prismaClient } from "@repo/db/client";
+
+const app = express();
+app.use(express.json());
 
 app.get("/", (_, res) => {
   res.send("Hello World!");
@@ -93,6 +92,7 @@ app.post("/signin", async (req, res) => {
     token,
   });
 });
+
 interface AuthenticatedRequest extends Request {
   userId?: string;
 }
@@ -131,4 +131,5 @@ app.post(
     }
   }
 );
+
 app.listen(5000);
