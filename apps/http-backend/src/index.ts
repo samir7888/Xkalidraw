@@ -43,17 +43,23 @@ app.post("/signup", async (req, res) => {
     });
     return;
   }
-  const user = await prismaClient.user.create({
-    data: {
-      email,
-      password,
-      name,
-    },
+try {
+    const user = await prismaClient.user.create({
+      data: {
+        email,
+        password,
+        name,
+      },
+    });
+  
+    res.json({
+      userId: user.id,
+    });
+} catch (error) {
+  res.status(411).json({
+    message: "User already exists with this email"
   });
-
-  res.json({
-    userId: user.id,
-  });
+}
 });
 
 app.post("/signin", async (req, res) => {
